@@ -6,14 +6,10 @@ import MovieDetails from "@/app/movie/components/movie-details";
 
 import { getMovieDetails } from "@/app/helpers/getMovieDetails";
 
-interface MoviePageProps {
-  params: {
-    id: string;
-  };
-}
+const MoviePage = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const resolvedParams = await params;
 
-const MoviePage = async ({ params }: MoviePageProps) => {
-  const response = await getMovieDetails({ movieId: params.id });
+  const response = await getMovieDetails({ movieId: resolvedParams.id });
   const movie = response.data;
 
   return (
